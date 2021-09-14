@@ -1,0 +1,16 @@
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+body {
+    color: black;
+}
+
+.card {
+    display: block;
+    position: relative;
+    &-url {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "orinoco-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "nodemonConfig": {
+    "ext": "html,css,js"
+  },
+  "scripts": {
+    "start": "node client.js",
+    "watch": "npm run watch-file & npm run watch-css",
+    "watch-file": "nodemon client.js",
+    "watch-css": "sass --watch src/sass/index.scss:stylesheets/index.css",
+    "dev": "concurrently \"cd server && npm run start\" \"npm run watch\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12",
+    "sass": "^1.39.2"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.1"
+  }
+}
