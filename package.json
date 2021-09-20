@@ -21,6 +21,8 @@
     "sass": "^1.39.2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@popperjs/core": "^2.10.1",
     "bootstrap": "^5.1.1"
   }
 }
