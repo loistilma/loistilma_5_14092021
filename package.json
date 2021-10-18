@@ -2,27 +2,48 @@
   "name": "orinoco-frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "client.js",
+  "private": true,
   "nodemonConfig": {
     "ext": "html,css,js"
   },
   "scripts": {
-    "start": "node client.js",
+    "webpack-start": "webpack serve --config webpack.dev.js --open-app-name 'google-chrome'",
+    "webpack-build": "webpack --config webpack.prod.js",
+    "client": "node client.js",
+    "server": "cd server && npm run start",
     "watch": "npm run watch-file & npm run watch-css",
     "watch-file": "nodemon client.js",
-    "watch-css": "sass --watch src/sass/index.scss:stylesheets/index.css",
+    "watch-css": "sass --watch src/scss/pages/:stylesheets/",
     "dev": "concurrently \"cd server && npm run start\" \"npm run watch\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babel-loader": "^8.2.2",
     "concurrently": "^6.2.1",
+    "css-loader": "^6.4.0",
+    "css-minimizer-webpack-plugin": "^3.1.1",
+    "hover.css": "^2.3.2",
+    "html-minimizer-webpack-plugin": "^3.3.0",
+    "html-webpack-plugin": "^5.4.0",
+    "mini-css-extract-plugin": "^2.4.2",
     "nodemon": "^2.0.12",
-    "sass": "^1.39.2"
+    "pug": "^3.0.2",
+    "pug3-loader": "^2.4.3",
+    "sass": "^1.39.2",
+    "sass-loader": "^12.2.0",
+    "script-loader": "^0.7.2",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@popperjs/core": "^2.10.1",
+    "animate.css": "^4.1.1",
     "bootstrap": "^5.1.1"
   }
 }

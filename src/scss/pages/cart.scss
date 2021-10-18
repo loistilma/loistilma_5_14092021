@@ -1,0 +1,33 @@
+@import '../base';
+
+th img {
+    width: 120px;
+    border-radius: 10px;
+}
+
+.table-responsive{
+    border-radius: 15px!important;
+}
+
+thead, tfoot{
+    background: darken(#f3e9f1, 10%)!important;
+    border-radius: 15px;
+}
+
+@include media-breakpoint-only(xs) {
+    table{
+
+        thead > tr > th:first-of-type{
+            display: none!important;
+        }
+
+        tbody > tr > th:first-of-type{
+            display: none!important;
+        }
+
+        tfoot > tr > th:first-of-type{
+            display: none!important;
+        }
+
+    }
+}

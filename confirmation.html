@@ -4,50 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <title>Orinoco | Nos Cameras</title> -->
-    <link rel="stylesheet" href="stylesheets/product.css">
+    <title>Orinoco | Vos commandes</title>
+    <link rel="stylesheet" href="stylesheets/index.css">
+
   </head>
   <body>
     <header-component></header-component>
     <main id="main">
       <div class="container my-2">
-        <h1>Produit</h1>
+        <h1>Commandes</h1>
       </div>
-      <section id="cards">
-        <div class="container">
-          <div class="row">
-
-          </div>
-        </div>
-      </section>
+      <div class="container">
+        <div id="confirmationSection"></div>
+      </div>
     </main>
     <footer-component></footer-component>
     <!-- All pages -->
-    <script type="module" src="config/config.js"></script>
+    <script src="config/config.js"></script>
     <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
     <script src="node_modules/bootstrap/js/dist/dom/data.js"></script>
     <script src="node_modules/bootstrap/js/dist/dom/event-handler.js"></script>
     <script src="node_modules/bootstrap/js/dist/dom/manipulator.js"></script>
     <script src="node_modules/bootstrap/js/dist/dom/selector-engine.js"></script>
     <script src="node_modules/bootstrap/js/dist/base-component.js"></script>
+    <script src="node_modules/bootstrap/js/dist/collapse.js"></script>
+    <script src="node_modules/bootstrap/js/dist/dropdown.js"></script>
+    <script src="node_modules/bootstrap/js/dist/modal.js"></script>
     <script src="node_modules/bootstrap/js/dist/tooltip.js"></script>
     <script src="src/header/header.js"></script>
-    <script type="module" src="src/utilities/api.js"></script>
+    <script src="src/utilities/requestHelper.js"></script>
+    <script src="src/utilities/api.js"></script>
     <script src="src/utilities/formatHelper.js"></script>
     <script src="src/utilities/htmlHelper.js"></script>
-    <script src="src/utilities/animate.js"></script>
     <script src="src/footer/footer.js"></script>
+    <script src="src/utilities/animate.js"></script>
     <!-- All pages -->
-    <!-- Index, product -->
-    <script src="src/utilities/btnQuantity.js"></script>   
-    <script src="src/utilities/createCard.js"></script>   
-    <!-- Index, product -->
-    <!-- Individual -->
-    <script src="src/product/addItemEvent.js"></script>
-    <script type="module" src="src/product/getCameraById.js"></script>
-    
     <script src="src/utilities/storageHelper.js"></script>
-    <script type="module" src="src/product/index.js"></script>
+    <!-- Individual -->
+    <script src="src/confirmation/createConfirm.js"></script>
+    <script src="src/confirmation/index.js"></script>
     <script src="src/utilities/bsTools.js"></script>
     <!-- Individual -->
   </body>

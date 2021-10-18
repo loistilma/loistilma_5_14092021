@@ -1,0 +1,94 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/solid';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/brands';
+@import '../../node_modules/animate.css/animate';
+@import 'fonts.scss';
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Signika', sans-serif;
+}
+
+h1 {
+    font-weight: 900
+}
+
+h2 {
+    font-weight: 500
+}
+
+body {
+    font-family: 'Dosis', sans-serif;
+    color: black;
+    background: #d0ecfa;
+}
+
+.top-header {
+    background: #f3e9f1!important;
+}
+
+.reset-a, .reset-a:hover, .reset-a:visited, .reset-a:focus, .reset-a:active  {
+    text-decoration: none;
+    color: inherit;
+    outline: 0;
+}
+
+.card {
+    background: transparent;
+
+    & img {
+        object-fit: cover;
+        height: 200px!important;
+        margin: 5px;
+        background: transparent;
+        margin-bottom: -15px;
+        z-index: 3000;
+        box-shadow: 0px 12px 12px -5px rgb(0 0 0 / 66%);
+    }
+
+    &-body {
+        background: white;
+        box-shadow: 0px 12px 12px -5px rgb(0 0 0 / 66%);
+    }
+
+}
+
+.top-header #navLogo{
+    z-index: 3000;
+}
+
+#navLogo, #navText, #navLinks {
+    transition: 0.4s;    
+}
+
+nav {
+    //height: 120px;
+    background: rgba(white, 0.9)!important;
+    transition: 0.4s;
+}
+
+.fa {
+    color: black!important;
+}
+
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+$baseWidth: 3rem;
+$applyColor: $pink;
