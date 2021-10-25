@@ -1,0 +1,57 @@
+extends layout.pug
+
+block main
+    
+    #cartSection
+        .h1.my-4 Panier
+        .table-responsive
+            table.table.mb-0
+                thead
+                    tr
+                        th(scope="col") Aperçu
+                        th(scope="col")
+                            b Article
+                        th(scope="col")
+                            b PU
+                        th.text-center(scope="col")
+                            b Quantité
+                        th(scope="col")
+                            b PT
+                        th.text-center(scope="col")
+                            i.fas.fa-trash-alt
+                tbody.bg-light
+                tfoot
+
+
+    #formSection
+        .h1.mt-4 Formulaire de commande
+        p.mb-4 Remplisser ce formulaire pour passer la commande        
+        form#formToJson(novalidate)
+            .row
+                .form-group.mb-2.col-sm-6
+                    label(for="lastName") Nom
+                    input#lastName(type="text" name="lastName" class="form-control" placeholder="Faubert" required)
+                    .invalid-feedback Ce champ est obligatoire     
+                .form-group.mb-2.col-sm-6
+                    label(for="firstName") Prénom
+                    input#firstName(type="text" name="firstName" class="form-control"  placeholder="Claude" required)
+                    .invalid-feedback Ce champ est obligatoire
+
+            .form-group.mb-2
+                label(for="address") Adresse
+                input#address(type="text" name="address" class="form-control"  placeholder="35 cours Jean Jaures" required)
+                .invalid-feedback Ce champ est obligatoire
+
+            .form-group.mb-2
+                label(for="city") Code postale - Ville
+                input#city(type="text" name="city" class="form-control" placeholder="33200 BORDEAUX" required)
+                .invalid-feedback Ce champ est obligatoire
+
+            .form-group.mb-2
+                label(for="email") Email
+                input#email(type="email" name="email" class="form-control" placeholder="claudefaubert@example.com" required)
+                .invalid-feedback Veuillez entrer une adresse e-mail valide
+
+            .text-center
+                button#btnSubmit(type="submit" class="btn btn-primary") Commander
+
