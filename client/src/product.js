@@ -1,41 +1,32 @@
+// Import de SCSS pour webpack
 import './scss/pages/product.scss'
 
+// Import de ES6 Module pour webpack
 import { APIUtils } from './utils/api'
-import { Card } from './card/Card'
+import { ProductCard } from './card/Card'
 import { addProductEvent } from './events/userActions'
-import { header } from './header/header'
 import { bsAlert } from './utils/bs'
+import { header } from './header/header'
 
-const product = new APIUtils(process.env.API_URL, 'application/json')
-const card = new Card
+const product = new APIUtils(process.env.API_URL)
 
-
-/**
-* Fonction pour recevoir l'objet contenant un produit par l'id puis traiter les données
-*/
-
+/** Fonction pour recevoir un produit par l'id puis traiter les données */
 async function getProductById() {
     const rawURL = window.location.href
     const url = new URL(rawURL)
-    // Extrait le paramètre id de l'url
-    const idParams = url.searchParams.get("id")
+    const idParams = url.searchParams.get("id") // Extrait le paramètre id de l'url
 
     try {
-
+        const card = new ProductCard('div', {class: 'col'}, '#cardSection')
         const camera = await product.get(`/api/cameras/${idParams}`)
-        card.create(camera, {product: true})
-        addProductEvent(camera)
-        header()
-        
+        card.create(camera)
+        addProductEvent(camera) // Ajoute l'event listener sur le bouton "Ajouter au panier"
     } catch(error) {
-
         bsAlert('#main .container', 'Erreur lors du traitement des données', 'danger', false)
         console.error(error)
-
     }
 }
 
-//export { getProductById }
-
+header()
 getProductById()
 

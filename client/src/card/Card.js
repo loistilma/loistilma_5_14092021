@@ -1,19 +1,9 @@
-import { createTag } from "../utils/dom"
+import { CreateNode } from "../utils/dom"
 import { numberToEUR } from "../utils/format"
 
-
-/**
-Class pour ajouter des cartes dans le DOM
-*/
-
-class Card {
-
-    selector() {
-        return document.querySelector('#cardSection')
-    }
-
-    indexPage(product) {
-        const inner = 
+class IndexCard extends CreateNode {
+    inner(product) {
+        let node = 
             `
             <a class="reset-a" href="/produit.html?id=${product._id}">
                 <div class="card mb-4 border-0">
@@ -32,12 +22,19 @@ class Card {
                 </div>
             </a>
             `
-
-        return inner
+        return node
     }
 
-    productPage(product) {
-        const inner = 
+    create(product) {
+        return this.createNode(this.inner(product))
+    }
+
+}
+
+class ProductCard extends CreateNode {
+
+    inner(product) {
+        const node = 
             `
             <div class="card mb-4 border-0">
                 <div class="row g-0">
@@ -81,8 +78,7 @@ class Card {
                 </div>
             </div>
             `
-
-        return inner
+        return node
     }
 
     btnQuantity(){
@@ -90,65 +86,26 @@ class Card {
         var count = document.getElementById('btnQuantity')
         var minus = document.getElementById('minus')
         var plus = document.getElementById('plus')
-        plus.addEventListener("click", async () => {
-    
+        plus.addEventListener("click", () => {
                 count.value ++
-                limit()
-    
+                limit() 
         })
-        minus.addEventListener("click", async () => {
-    
+        minus.addEventListener("click", () => {    
                 count.value --
                 limit()
-    
         })
-    
+
         function limit(){
-    
-            if(count.value > 1){
-    
-                minus.removeAttribute("disabled")
-    
-            }else if(count.value < 2 ){
-    
-                minus.setAttribute("disabled", '')
-    
-            }
-            if(count.value > 9){  
-    
-                plus.setAttribute("disabled", '')
-    
-            }else if(count.value < 10){
-    
-                plus.removeAttribute("disabled")
-                
-            }
+            count.value >= 10 ? plus.setAttribute("disabled", '') : plus.removeAttribute("disabled")
+            count.value <= 1 ? minus.setAttribute("disabled", '') : minus.removeAttribute("disabled")
         }
     }
 
-    create(product, options = {index: false, product: false}) {
-        const col = options.index ? 'col-sm-6' : 'col'
-        const cardContainer = createTag('div', {class: col})
-
-        if(options.index){
-
-            var inner = this.indexPage(product)
-
-        } else if(options.product) {
-
-            var inner = this.productPage(product)
-
-        }
-
-        cardContainer.innerHTML = inner
-
-        this.selector().appendChild(cardContainer)
-        
-        if(options.product){
-            this.btnQuantity()
-        }
+    create(product) {
+        this.createNode(this.inner(product))
+        this.btnQuantity()
     }
 
 }
-  
-export { Card }
+
+export { IndexCard, ProductCard }

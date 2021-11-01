@@ -1,16 +1,20 @@
 import { cart } from "../utils/storage"
 
 function header() {
-    const badge =  document.getElementById('cart-nb')
+    var badgeN = document.getElementById('cart-nb')
+    //console.log(cart.count())
 
-    if(cart.count() === 0 || cart.count() === null){
-
-        badge.innerHTML = ""
-
+    if(badgeN && cart.count() === 0 || cart.count() === undefined){
+        badgeN.innerHTML = ""
     } else {
-
-        badge.innerHTML = cart.count()
-
+        let badge = 
+            `
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                ${cart.count()}
+                <span class="visually-hidden">Articles du panier</span>
+            </span>
+            `
+        document.getElementById('cart-nb').innerHTML = badge        
     }
     
 }

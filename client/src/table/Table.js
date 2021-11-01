@@ -1,18 +1,7 @@
 import { numberToEUR } from '../utils/format'
-import { createTag, removeElement } from '../utils/dom'
-import { cart } from '../utils/storage'
+import { CreateNode } from '../utils/dom'
 
-/**
-* Class pour créer le tableau html du panier
-*/
-
-class Table {
-
-    createTr(selector, inner){
-        let tr = createTag('tr')
-        tr.innerHTML = inner
-        selector.appendChild(tr)
-    }
+class BodyTable extends CreateNode {
 
     quantitySelect(quantity) {
         var i = 1
@@ -59,7 +48,14 @@ class Table {
         return inner
     }
 
-    trFoot() {
+    create(product, i) {
+        this.createNode(this.trBody(product, i))
+    }
+}
+
+class FootTable extends CreateNode {
+
+    trFoot(cart) {
         const inner =
             `
                 <th scope="row"><b>Total</b></th>
@@ -72,34 +68,10 @@ class Table {
         return inner
     }
 
-    create(products){
-        if(products === null || products.length === 0){
-
-            document.querySelector('.table-responsive').innerHTML = 'Votre panier est vide'
-            removeElement('form')
-      
-        } else {
-      
-            let tbody = document.querySelector('tbody')
-            tbody.innerHTML = ""
-        
-            let tfoot = document.querySelector('tfoot')
-            tfoot.innerHTML = ""
-
-            let i = 1
-
-            products.forEach(product => {
-                this.createTr(tbody, this.trBody(product, i))
-                i++
-            })
-        
-            this.createTr(tfoot, this.trFoot(products))
-
-        }
+    create(cart) {
+        this.createNode(this.trFoot(cart))
     }
 
 }
 
-const table = new Table
-
-export { table }
+export { BodyTable, FootTable }

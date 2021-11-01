@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -44,7 +43,8 @@ module.exports = {
     },
 
     module: {
-        rules: [  
+        rules: [ 
+        /* 
         {
             test: /\.m?js$/,
             exclude: /(node_modules|bower_components)/,
@@ -63,7 +63,8 @@ module.exports = {
                     plugins: ['@babel/plugin-proposal-class-properties']
                 }
             }
-        }, 
+        },
+        */
         {
             test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
             type: 'asset/resource',

@@ -5,10 +5,7 @@ import { cart } from '../utils/storage'
 import { header } from '../header/header'
 import { animateCSS } from '../utils/animate'
 
-/**
-* Fonction pour écouter des évenement
-*/
-
+/** Fonction pour écouter des évènement */
 function userListener(options = {}, ev, doThat) {
     if (options.el) {
 
@@ -25,83 +22,63 @@ function userListener(options = {}, ev, doThat) {
     }
 }
 
-/**
-* Ecouteur d'évenement sur la page product
-*/
-
-
+/** Ecouter l'évènement click ajouter au panier sur la page product */
 const addProductEvent = (camera) => userListener({ el: '#addProduct' }, 'click', () => {
-    try {
 
+    try {
         cart.add(camera)
         header()
-
     } catch (error) {
-
         bsAlert('#error', "Erreur lors de l'ajout d'un article au panier", 'danger', false)
         console.error(error)
-
     }
+
 })
 
 
-/**
-* Ecouteur d'évenement sur la page panier
-*/
-
-
+/** Ecouter l'évènement click  supprimer (bouton minus) sur la page panier */
 const delProductEvent = () => userListener({ els: '.delProduct' }, 'click', (e) => {
-    try {
 
+    try {
         let id = e.target.closest('button').dataset.id
         //console.log(id)
         cart.del(id)
-        refreshTotal()
-        e.target.style.setProperty('--animate-duration', '1s')
-        delZoomOut(e.target.closest('button'))
-        header()
-
+        refreshTotal() // Change la valeur du prix total
+        e.target.style.setProperty('--animate-duration', '1s') // animate.css
+        delZoomOut(e.target.closest('button'), 2) // Retire l'element du dom
+        header() // Badge Count
     } catch (error) {
-
         bsAlert('#error', "Erreur lors de la suppression d'un produit", 'danger', false)
         console.error(error)
-
     }
+
 })
 
+/** Ecouter l'évènement change sur select quantité (liste déroulante de nombre) sur la page panier */
 const changeQuantityEvent = () => userListener({ els: '[id^=cartQuantity]' }, 'change', (e) => {
-    try {
 
+    try {
         let id = e.target.dataset.id
         ///console.log(id)
         cart.updateQuantity(id, e.target)
-        refreshPriceQuantity(e.target, id)
+        refreshPriceQuantity(e.target, id) // Change la valeur du prix total d'un article suivant la quantité
         refreshTotal()
         header()
-
     } catch (error) {
-
         bsAlert('#error', "Erreur lors du changement de quantité", 'danger', false)
         console.error(error)
     }
+
 })
 
-const clearCartEvent = () => userListener({ el: '#clearCart' }, 'click', () => {
+/** Ecouter l'évènement click  vider le panier (bouton ban) sur la page panier */
+const clearCartEvent = () => userListener({ el: '#clearCart' }, 'click', (e) => {
 
     try {
-
         cart.delAll()
+        delZoomOut(e.target.closest('button'), 4)
         header()
-
-        if (cart.isEmpty()) {
-
-            document.querySelector('.table-responsive').innerHTML = 'Votre panier est vide'
-            document.querySelector('#formSection').remove()
-
-        }
-
     } catch (error) {
-
         bsAlert('#error', "Erreur lors de la suppression du panier", 'danger', false)
         console.error(error)
     }
@@ -139,9 +116,9 @@ function refreshTotal() {
 
 }
 
-function delZoomOut(element) {
+function delZoomOut(element, parentN) {
 
-    let tabEl = getParentNode(element, 2)
+    let tabEl = getParentNode(element, parentN)
     tabEl.style.setProperty('--animate-duration', '1s')
 
     animateCSS(tabEl, 'bounceOut').then(() => {

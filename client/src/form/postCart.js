@@ -1,25 +1,21 @@
+import { APIUtils } from '../utils/api'
 import isValid from './formValidation'
 import { cart, confirmation } from '../utils/storage'
-import { APIUtils } from '../utils/api'
-//import { table } from '../table/Table'
 import { modalConfirm } from './modalConfirm'
 import { bsAlert } from '../utils/bs'
 
 const product = new APIUtils(process.env.API_URL, {'Accept': 'application/json', 'Content-Type': 'application/json'})
 
-/**
-* Fonction pour récuperer la valeur de tout les inputs en les ajoutant dans un objet
-*/
-
+/** Récuperer nom/valeur des inputs et les ajouter dans un objet {name: value} */
 function formToJson(form) {
     var obj = {}
     var elements = form.querySelectorAll( "input" )
 
     elements.forEach(element => {
-        var name = element.name
-        var value = element.value
+        var name = element.name // input.name
+        var value = element.value // input.value
 
-        if(name) {
+        if(name) { 
             obj[name] = value
         }
     })
@@ -27,10 +23,7 @@ function formToJson(form) {
     return obj
 }
 
-/**
-* Fonction pour créer un tableau avec uniquement l'id des produits qui sont dans le panier
-*/
-
+/** Créer un tableau avec uniquement l'id des produits qui sont dans le panier */
 function pushProductIdToArr() {
     var products = []
     cart.get().forEach(product => {
@@ -40,32 +33,27 @@ function pushProductIdToArr() {
     return products
 }
 
-/**
-* Fonction pour envoyer des données sur le serveur et effectuer d'autre opérations avec les donées reçu
-*/
-
-function postProduct(){
+/** Envoyer une réquète body sur le serveur et effectuer d'autre opérations avec la réponse du serveur */
+function postCart(){
     //console.log(isValid)
     var form = document.getElementById("formToJson")
     if(form){
         
         form.addEventListener( "submit", function(e) {
             e.preventDefault()
-            
             try{
-                if (Object.values(isValid).every(item => item === true)){
+                if (Object.values(isValid).every(item => item === true)){ // Si toutes les valeurs de isValid sont égales à true
 
                     var jsonData = {
                         contact: formToJson(this),
                         products: pushProductIdToArr()
                     }
-
                     //console.log(jsonData.contact)
 
                     product.post('/api/cameras/order', jsonData).then(response => {
                         //console.log(response)
                         modalConfirm(response)
-                        confirmation.add(response)
+                        confirmation.add(response) // copie de la reponse dans localStorage
                         cart.delAll()
                     })
 
@@ -73,7 +61,7 @@ function postProduct(){
 
                     e.preventDefault()
                     e.stopPropagation()
-                    form.classList.add('was-validated') 
+                    form.classList.add('was-validated') // style bootstrap
 
                 }
 
@@ -89,4 +77,4 @@ function postProduct(){
 
 }
 
-export { postProduct }
+export { postCart }

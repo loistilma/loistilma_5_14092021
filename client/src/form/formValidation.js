@@ -1,8 +1,5 @@
 
-/**
-* Objet pour gérer la validation du formulaire
-*/
-
+/** Objet pour gérer la validation du formulaire */
 const isValid = {
     firstName: false,
     lastName: false,
@@ -11,13 +8,11 @@ const isValid = {
     email: false,
 }
 
-/**
-* Fonction pour écouter et vérifier si les inputs match avec des regex  
-*/
-
+/** Fonction pour écouter et vérifier si les inputs match avec les regex */
 export function formValidation(){
-    const inputs = document.querySelectorAll('input');
+    const inputs = document.querySelectorAll('input') // Retourne un tableau de tout les input
 
+    // Objet contenant les regex (la clé doit avoir même nom de l'id de l'input)
     const patterns = {
         firstName: /^[a-zA-Z\d]{1,20}$/,
         lastName: /^[a-zA-Z\d]{1,20}$/,
@@ -29,6 +24,7 @@ export function formValidation(){
 
     inputs.forEach((input) => {
         input.addEventListener('keyup', (e) => {
+            // la clé doit avoir même nom de l'id de l'input
             validate(e.target, patterns[e.target.attributes.id.value])
         })
     })
@@ -36,10 +32,10 @@ export function formValidation(){
 
 
     function validate(field, regex) {
-        if (regex.test(field.value)) {
+        if (regex.test(field.value)) { // Si la regex match avec la valeur dans l'input
 
-            field.className = 'form-control is-valid'
-            isValid[`${field.id}`] = true
+            field.className = 'form-control is-valid' // style bootstrap
+            isValid[`${field.id}`] = true // Modification de l'id concerné dans l'object isValid
             
         } else {
 

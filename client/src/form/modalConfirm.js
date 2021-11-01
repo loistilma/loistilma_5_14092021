@@ -1,10 +1,7 @@
 import { createTag } from '../utils/dom'
 import { Modal } from 'bootstrap'
 
-/**
-* Fonction pour l'ouverture d'un modal pour confirmer la commande
-*/
-
+/** Fonction pour l'ouverture d'un modal pour indiquant le numéro de commande */
 function modalConfirm(data){
     var modalId = document.getElementById('modalConfirm')
     var modalDialog = createTag('div', {class: 'modal-dialog'})
