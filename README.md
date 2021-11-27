@@ -3,8 +3,8 @@
 Instructions
 --------------------------------------------------------------------------------
 
-1. Install client and server 'npm i'
-2. Go to client folder 'cd client'
-3. Launch script 'npm start' to launch concurently client and server
-4. Go to client(http://localhost:3001/) server(http://localhost:3000/)
+1. Run `npm i` into client folder
+2. Run `npm i` into server folder 
+3. Run `npm start` into client folder to launch concurently client and server
+4. Go to [http://localhost:3000/](http://localhost:3000/)
 
